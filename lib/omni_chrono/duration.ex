@@ -1,4 +1,16 @@
 defmodule OmniChrono.Duration do
+  @moduledoc """
+  Represents a duration which can be composed of some number of:
+  - years
+  - months
+  - weeks
+  - days
+  - hours
+  - minutes
+  - seconds
+
+  For example, can represent a duration of "5 years, 2 months, 8 days, 3 minutes".
+  """
   defstruct [:unit, :quantity]
 
   @type duration_unit ::
@@ -10,6 +22,22 @@ defmodule OmniChrono.Duration do
           | :minutes
           | :seconds
 
+  @doc """
+  Takes a binary string representing a duration (e.g. "2w" or "2w 1d") and
+  converts it into a Duration struct.
+
+  The recognised duration unit strings are as follows:
+  - "y" for years
+  - "m" for months
+  - "w" for weeks
+  - "d" for days
+  - "h" for hours
+  - "mins" for mins
+  - "s" for seconds
+
+  Note, because months and minutes would share the same single-character unit
+  string, minutes is instead represented as "mins".
+  """
   @spec new(binary()) ::
           %__MODULE__{quantity: integer(), unit: duration_unit()}
           | {:error, {:invalid_duration, binary()}}
