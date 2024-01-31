@@ -2,13 +2,13 @@ defmodule OmniChrono.Duration do
   defstruct [:unit, :quantity]
 
   @type duration_unit ::
-    :years |
-    :months |
-    :weeks |
-    :days |
-    :hours |
-    :minutes |
-    :seconds
+          :years
+          | :months
+          | :weeks
+          | :days
+          | :hours
+          | :minutes
+          | :seconds
 
   @spec new(binary()) ::
           %__MODULE__{quantity: integer(), unit: duration_unit()}
